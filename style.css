@@ -19,17 +19,24 @@ body {
   align-items: center;
   justify-content: center;
 }
+.countries-container {
+  overflow-x: auto; /* Enable horizontal scrolling */
+  max-width: 100%; /* Adjust the maximum width based on your design */
+  margin-bottom: 8rem; /* Add some margin at the bottom */
+  position: relative;
+}
 
 .container {
   display: flex;
   flex-flow: column;
   align-items: center;
+  margin-top: 3rem;
 }
 
 .countries {
   /* margin-bottom: 8rem; */
   display: flex;
-
+  flex-wrap: wrap;
   font-size: 2rem;
   opacity: 0;
   transition: opacity 1s;
@@ -42,7 +49,7 @@ body {
   width: 30rem;
   border-radius: 0.7rem;
   margin: 0 3rem;
-  /* overflow: hidden; */
+  overflow: hidden;
 }
 
 .neighbour::before {
@@ -64,8 +71,9 @@ body {
 }
 
 .country__img {
-  width: 30rem;
-  height: 17rem;
+  width: 100%;
+  max-width: 100%;
+  height: auto;
   object-fit: cover;
   background-color: #eee;
   border-top-left-radius: 0.7rem;
@@ -98,13 +106,29 @@ body {
   font-size: 2.4rem;
 }
 
-.btn-country {
+.btn-country,
+.btn-showmore,
+.btn-tryagain {
   border: none;
   font-size: 2rem;
   padding: 2rem 5rem;
   border-radius: 0.7rem;
   color: white;
   background-color: orangered;
+  cursor: pointer;
+}
+
+.btn-showmore,
+.btn-tryagain {
+  position: fixed; /* Fix the button position */
+  bottom: 5rem; /* Stick it to the bottom */
+  left: 50%; /* Center it horizontally */
+  transform: translateX(-50%); /* Adjust for centering */
+  padding: 1rem; /* Add some padding */
+  background-color: orangered;
+  color: white;
+  border: none;
+  border-radius: 0.7rem;
   cursor: pointer;
 }
 
@@ -123,4 +147,15 @@ body {
   margin: 2rem;
   border: 3rem solid white;
   box-shadow: 0 2rem 5rem 1rem rgba(0, 0, 0, 0.1);
+}
+
+.hidden {
+  display: none;
+}
+
+@media (max-width: 600px) {
+  .country {
+    width: 100%; /* Full width on smaller screens */
+    max-width: none; /* No maximum width on smaller screens */
+  }
 }
