@@ -131,6 +131,9 @@ body {
   border-radius: 0.7rem;
   cursor: pointer;
 }
+.btn-tryagain {
+  background-color: red;
+}
 
 .images {
   display: flex;
