@@ -12,7 +12,10 @@ btn.addEventListener('click', () => {
   btn.classList.add('hidden');
 });
 btnAgain.addEventListener('click', () => {
-  location.reload();
+    btnAgain.innerText = "Are you sure?";
+    btnAgain.addEventListener('click', () => {
+          location.reload();
+    })
 });
 
 const renderError = function (msg) {
@@ -83,19 +86,24 @@ const getCountryData = function (country) {
       countriesContainer.style.opacity = 1;
     });
 
-  // Allow the user to click the button to display the next neighbor
   btnMore.addEventListener('click', () => {
-    const newCountryContainer = document.querySelector(
-      '.country.neighbour:last-child'
-    );
-    newCountryContainer.scrollIntoView({ behavior: 'smooth', block: 'center' });
     if (displayedNeighbors < allNeighborData.length) {
       renderCountry(allNeighborData[displayedNeighbors][0], 'neighbour');
       displayedNeighbors++;
+
       if (displayedNeighbors >= allNeighborData.length) {
         btnMore.classList.add('hidden');
-        btnAgain.classList.remove('hidden')
+        btnAgain.classList.remove('hidden');
       }
+
+      // Scroll to the last added country container after a short delay
+      setTimeout(() => {
+        const newCountryContainer = countriesContainer.lastElementChild;
+        newCountryContainer.scrollIntoView({
+          behavior: 'smooth',
+          block: 'center',
+        });
+      }, 300); // Adjust the delay as needed
     }
   });
 };
@@ -103,28 +111,3 @@ const getCountryData = function (country) {
 const capitalizeFirstLetter = string => {
   return string.charAt(0).toUpperCase() + string.slice(1).toLowerCase();
 };
-
-// const inputCoords = function(coords) {
-//     const coords1 = prompt(`Whats your first coordinate?`)
-//     const coords2 = prompt(`Whats your second coordinate?`)
-//     const coords = coords1.concat(',', coords2)
-// }
-// inputCoords()
-
-// const getCountryCoords = function (cord1, cord2) {
-//   const apiKey = '15992428671418319566x58885';
-//   fetch(`https://geocode.xyz/${cord1},${cord2}?geoit=json&auth=${apiKey}`)
-//     .then(response => response.json())
-//     .then(data => {
-//       const formattedCity = capitalizeFirstLetter(data.city);
-//       console.log(`You're in ${formattedCity}, ${data.country}`);
-//       getCountryData(data.country);
-//     })
-//     .catch(err => {
-//       console.error('Error fetching or parsing data:', err);
-//     });
-// };
-
-// getCountryCoords(52.508,13.381);
-// getCountryCoords(19.038,72.873);
-// getCountryCoords(-33.933,18.474);
